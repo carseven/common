@@ -1,0 +1,3 @@
+module github.com/carseven/common
+
+go 1.21.4
