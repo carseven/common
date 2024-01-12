@@ -1,4 +1,4 @@
-# go-package
+# go-package-template
 
 Go package template to reuse code and utilities.
 
