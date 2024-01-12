@@ -1,0 +1,44 @@
+name: Go Releaser
+
+# Trigger pull request closed events on the main branch
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+    paths-ignore: ["README.md"]
+
+# Only run the test if the pull request is merged
+jobs:
+  build:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21.x"
+      - name: Install dependencies
+        run: go get .
+      - name: Test with the Go CLI
+        run: go test
+
+  # Only run the version bump on pull request merges
+  version_bump:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: "0"
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          VERBOSE: true
+          DEFAULT_BUMP: patch

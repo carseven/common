@@ -1,0 +1,31 @@
+name: Go Test
+
+on:
+  # Trigger on pull requests open and sync (new commits, etc..) events
+  pull_request:
+    types: [opened, synchronize]
+    branches: [main]
+    paths-ignore: ["README.md"] # Ignore changes to the README
+  # Trigger on push to main branch
+  push:
+    branches: [main]
+    paths-ignore: ["README.md"] # Ignore changes to the README
+
+# Cancel any previous runs in progress
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21.x"
+      - name: Install dependencies
+        run: go get .
+      - name: Test with the Go CLI
+        run: go test
