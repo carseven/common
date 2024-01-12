@@ -6,10 +6,6 @@ on:
     types: [opened, synchronize]
     branches: [main]
     paths-ignore: ["README.md"] # Ignore changes to the README
-  # Trigger on push to main branch
-  push:
-    branches: [main]
-    paths-ignore: ["README.md"] # Ignore changes to the README
 
 # Cancel any previous runs in progress if new ones come in (Avoid excessive build queue)
 concurrency:
@@ -17,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,4 +22,4 @@ jobs:
         with:
           go-version: "1.21.x"
       - name: Run tests
-        run: go test -v ./...
+        run: make test

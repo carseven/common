@@ -15,3 +15,8 @@ func TestGetAge(t *testing.T) {
 	age := GetAge(20)
 	assert.Equal(t, 20, age)
 }
+
+func TestGetHelloName(t *testing.T) {
+	hello := GetHello("John")
+	assert.Equal(t, "Hello John", hello)
+}
