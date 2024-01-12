@@ -9,3 +9,7 @@ func CustomResponseHeaders(next echo.HandlerFunc) echo.HandlerFunc {
 		return next(c)
 	}
 }
+
+func Example(name string) string {
+	return "Hello " + name
+}
