@@ -1,6 +1,6 @@
 package handlers
 
-import "github.com/labstack/echo"
+import "github.com/labstack/echo/v4"
 
 func CustomResponseHeaders(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
