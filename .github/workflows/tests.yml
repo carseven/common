@@ -6,10 +6,6 @@ on:
     types: [opened, synchronize]
     branches: [main]
     paths-ignore: ["README.md"] # Ignore changes to the README
-  # Trigger on push to main branch
-  push:
-    branches: [main]
-    paths-ignore: ["README.md"] # Ignore changes to the README
 
 # Cancel any previous runs in progress if new ones come in (Avoid excessive build queue)
 concurrency:
