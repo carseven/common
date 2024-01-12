@@ -1,4 +1,4 @@
-module github.com/carseven/common
+module github.com/carseven/go-package-template
 
 go 1.21.4
 
