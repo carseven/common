@@ -5,7 +5,7 @@ Go package template to reuse code and utilities.
 # Install package
 
 ```shell
-go get -v github.com/carseven/common@v1.0.0
+go get -v github.com/carseven/go-package-template@v1.0.0
 ```
 
 ## Install configuration for private repositories
