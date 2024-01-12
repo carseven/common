@@ -11,7 +11,7 @@ on:
     branches: [main]
     paths-ignore: ["README.md"] # Ignore changes to the README
 
-# Cancel any previous runs in progress
+# Cancel any previous runs in progress if new ones come in (Avoid excessive build queue)
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -25,7 +25,5 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: "1.21.x"
-      - name: Install dependencies
-        run: go get .
-      - name: Test with the Go CLI
-        run: go test
+      - name: Run tests
+        run: go test -v ./...
